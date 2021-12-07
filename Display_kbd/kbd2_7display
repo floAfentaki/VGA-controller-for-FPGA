@@ -1,0 +1,15 @@
+module kbd2_7display (reset, clk, ps2clk, ps2data, left, right);
+  input        reset, clk;
+  input        ps2clk, ps2data;
+  output [7:0] left, right;
+  wire   [7:0] scan;
+  wire   [7:0] scanPrev;
+
+  kbd_protocol kbd (reset, clk, ps2clk, ps2data, scan, scanPrev);
+  scan_2_7seg  lft (scan, left);
+  //led 			rft(scanPrev, right);
+  scan_2_7seg  rft (scanPrev, right);
+
+
+  
+endmodule
